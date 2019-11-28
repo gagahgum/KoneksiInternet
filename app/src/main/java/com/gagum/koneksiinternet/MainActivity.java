@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    //Deklarasi
     DownloadWebpageTask downloadWebpageTask;
     DownloadGambarTask downloadGambarTask;
     NetworkInfo networkInfo;
@@ -32,7 +34,14 @@ public class MainActivity extends AppCompatActivity {
 //         networkInfo = connMgr.getActiveNetworkInfo();
 
 
+        //Inisialisasi
         tvSourcepage = findViewById(R.id.tvSourcepage);
+        gambar = findViewById(R.id.Gambar);
+        textStatusKoneksi = findViewById(R.id.textStatusKoneksi);
+        btnGambar = findViewById(R.id.btnGambar);
+
+
+        //Check Connection Action
         btnKoneksi = findViewById(R.id.button);
         btnKoneksi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,17 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 downloadWebpageTask.execute("http://google.com");
             }
         });
-        gambar = findViewById(R.id.Gambar);
-        textStatusKoneksi = findViewById(R.id.textStatusKoneksi);
 
+        //Picture Download Action
         btnGambar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (networkInfo != null && networkInfo.isConnected()) {
                     downloadGambarTask = new DownloadGambarTask(MainActivity.this);
-                            downloadGambarTask.execute("");
+                            downloadGambarTask.execute("https://cdn.rentalmobilbali.net/wp-content/uploads/2016/02/Pemandangan-Kabut-Desa-Pinggan-Kintamani-1.jpg");
+
+
                 } else {
                     textStatusKoneksi.setText("No network connection available.");
+                    textStatusKoneksi.setTextColor(3);
                 }
             }
         });
